@@ -1,0 +1,24 @@
+.image img{
+    width: 100px;
+}
+
+
+h2{
+    text-align: center;
+}
+
+.div1{
+    display: flex;
+    width: 60%;
+    float: left;
+}
+
+
+.div2{
+    display: flex;
+    width: 40%;
+}
+
+/* .div-container{
+    display:flex
+} */
