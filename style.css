@@ -24,6 +24,17 @@ h2{
     font-size: larger;
 }
 
+
+.div-log{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.div-log h2 {
+    align-self: flex-start;
+}
+
+
 /* .div-container{
     display:flex
 } */

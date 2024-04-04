@@ -1,6 +1,6 @@
 const logList = []; // Array of the results
 
-const points = 0; // Players points
+let points = 0; // Players points
 
 let timer = 5;
 
@@ -9,15 +9,11 @@ function sleep(ms) {
 }
 
 function printLogging(choosen, value, status) {
-  // document.add
-  console.log(
-    "Você escolheu o número: " +
-      value +
-      " e o número sorteado foi: " +
-      choosen +
-      " logo você " +
-      status
-  );
+
+  let list = document.getElementById("logging");
+  let item = document.createElement("li");
+  item.appendChild(document.createTextNode("Você escolheu o número: " + value + " e o número sorteado foi: " + choosen + " logo você " + status));
+  list.appendChild(item);
 
   // Add the result of the round
   logList.push(status);
