@@ -1,6 +1,7 @@
 let points = 0; // Players points
 
 let timer = 5;
+let timerOn = false;
 let i = 0;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
@@ -30,6 +31,9 @@ function printLogging(choosen, value, status) {
 }
 
 function chooseWinner(value) {
+  if (timerOn === false){
+    return;
+  }
   var choosen = Math.floor(Math.random() * 9) + 1;
   timer = -99;
   var status;
@@ -48,6 +52,7 @@ function chooseWinner(value) {
 }
 
 async function startTimer() {
+  timerOn = true;
   document.getElementById("button").disabled = true;
   document.getElementById("timer").innerText = "BO JOGAR????";
 
@@ -57,19 +62,25 @@ async function startTimer() {
     await sleep(1000);
   }
 
+  updateStatus("timeout");
+
   if (timer = -99) {document.getElementById("timer").innerText = "Rapidin tu"}
   else {document.getElementById("timer").innerText = "Vapo papai!!";}
   
   timer = 5;
   document.getElementById("button").disabled = false;
+  
+  // timerOn = false;
 }
 
 function updateStatus(status) {
   document.getElementById("resultado").innerText = status;
-
+  var buttonwin = "b" + 3
   if (status == "Ganhou") {
+    document.getElementById(buttonwin).style.backgroundColor = "green";
     document.getElementById("resultado").style.color = "green";
   } else {
+    document.getElementById(buttonwin).style.backgroundColor = "red";
     document.getElementById("resultado").style.color = "red";
   }
 }
