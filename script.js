@@ -1,5 +1,3 @@
-const logList = []; // Array of the results
-
 let points = 0; // Players points
 
 let timer = 5;
@@ -13,11 +11,11 @@ function printLogging(choosen, value, status) {
   item.appendChild(
     document.createTextNode(
       "Você escolheu o número: " +
-      value +
-      " e o número sorteado foi: " +
-      choosen +
-      " logo você " +
-      status
+        value +
+        " e o número sorteado foi: " +
+        choosen +
+        " logo você " +
+        status
     )
   );
   list.appendChild(item);
@@ -29,13 +27,11 @@ function printLogging(choosen, value, status) {
       list.removeChild(list.firstChild);
     }
   }
-
-  // Add the result of the round
-  logList.push(status);
 }
 
 function chooseWinner(value) {
   var choosen = Math.floor(Math.random() * 9) + 1;
+  timer = -99;
   var status;
   console.log(choosen);
 
@@ -49,7 +45,6 @@ function chooseWinner(value) {
 
   printLogging(choosen, value, status);
   updateStatus(status);
-
 }
 
 async function startTimer() {
@@ -62,20 +57,19 @@ async function startTimer() {
     await sleep(1000);
   }
 
-  document.getElementById("timer").innerText = "Vapo papai!!";
+  if (timer = -99) {document.getElementById("timer").innerText = "Rapidin tu"}
+  else {document.getElementById("timer").innerText = "Vapo papai!!";}
+  
   timer = 5;
   document.getElementById("button").disabled = false;
 }
-
 
 function updateStatus(status) {
   document.getElementById("resultado").innerText = status;
 
   if (status == "Ganhou") {
     document.getElementById("resultado").style.color = "green";
-  }
-  else {
+  } else {
     document.getElementById("resultado").style.color = "red";
   }
 }
-
