@@ -35,6 +35,21 @@ h2{
 }
 
 
+.div-resultado{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.div-resultado h2 {
+    align-self: flex-start;
+}
+
+.div-resultado p{
+    color: black;
+}
+
+
+
 /* .div-container{
     display:flex
 } */

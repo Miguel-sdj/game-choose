@@ -3,6 +3,7 @@ const logList = []; // Array of the results
 let points = 0; // Players points
 
 let timer = 5;
+let i = 0;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -12,14 +13,22 @@ function printLogging(choosen, value, status) {
   item.appendChild(
     document.createTextNode(
       "Você escolheu o número: " +
-        value +
-        " e o número sorteado foi: " +
-        choosen +
-        " logo você " +
-        status
+      value +
+      " e o número sorteado foi: " +
+      choosen +
+      " logo você " +
+      status
     )
   );
   list.appendChild(item);
+  i++;
+
+  if (i >= 11) {
+    i = 0;
+    while (list.firstChild) {
+      list.removeChild(list.firstChild);
+    }
+  }
 
   // Add the result of the round
   logList.push(status);
@@ -39,6 +48,8 @@ function chooseWinner(value) {
   }
 
   printLogging(choosen, value, status);
+  updateStatus(status);
+
 }
 
 async function startTimer() {
@@ -55,3 +66,16 @@ async function startTimer() {
   timer = 5;
   document.getElementById("button").disabled = false;
 }
+
+
+function updateStatus(status) {
+  document.getElementById("resultado").innerText = status;
+
+  if (status == "Ganhou") {
+    document.getElementById("resultado").style.color = "green";
+  }
+  else {
+    document.getElementById("resultado").style.color = "red";
+  }
+}
+
