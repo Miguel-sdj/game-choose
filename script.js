@@ -1,6 +1,5 @@
 let points = 0; // Players points
 
-let timer = 5;
 let timerOn = false;
 let i = 0;
 
@@ -36,11 +35,13 @@ function chooseWinner(value) {
   }
   var choosen = Math.floor(Math.random() * 9) + 1;
   timer = -99;
+  var numberButton = value;
   var status;
   console.log(choosen);
 
   if (choosen == value) {
     status = "Ganhou";
+
     points = points + 1000000;
   } else {
     status = "Perdeu";
@@ -48,39 +49,75 @@ function chooseWinner(value) {
   }
 
   printLogging(choosen, value, status);
-  updateStatus(status);
+  updateStatus(status, numberButton);
 }
+
+
+
+
+function resetColor(){
+  for (let i = 1; i <= 9; i++) {
+    var button = "b" + i;
+    document.getElementById(button).style.backgroundColor = "black";
+    changeButtonImage(button, 'img/cat_default.png')
+
+  }
+}
+
+let countdown;
+
+
 
 async function startTimer() {
+  let timer = 10;
   timerOn = true;
-  document.getElementById("button").disabled = true;
-  document.getElementById("timer").innerText = "BO JOGAR????";
 
-  while (timer >= 0) {
+  const countdown = setInterval(() => {
     document.getElementById("timer").innerText = timer;
-    timer = timer - 1;
-    await sleep(1000);
-  }
+    timer--;
 
-  updateStatus("timeout");
+    if (timer < 0) {
+      clearInterval(countdown);
+      updateStatus("timeout");
+      timerOn = false;
+    }
+  }, 1000);
 
-  if (timer = -99) {document.getElementById("timer").innerText = "Rapidin tu"}
-  else {document.getElementById("timer").innerText = "Vapo papai!!";}
-  
-  timer = 5;
-  document.getElementById("button").disabled = false;
-  
-  // timerOn = false;
+
+  // function resetGame() {
+  //   clearInterval(countdown);
+  //   timerOn = false;
+  // }
 }
 
-function updateStatus(status) {
-  document.getElementById("resultado").innerText = status;
-  var buttonwin = "b" + 3
+
+
+function updateStatus(status, numberButton) {
+  resetColor();
+  var buttonwin = "b" + parseInt(numberButton)
+  console.log(buttonwin);
   if (status == "Ganhou") {
+    document.getElementById("resultado").innerText = status;
     document.getElementById(buttonwin).style.backgroundColor = "green";
+    changeButtonImage(buttonwin, 'img/cat_right.png')
     document.getElementById("resultado").style.color = "green";
-  } else {
+
+  } else if (status == "Perdeu"){
+    document.getElementById("resultado").innerText = status;
     document.getElementById(buttonwin).style.backgroundColor = "red";
+    changeButtonImage(buttonwin, 'img/cat_wrong.png')
+
     document.getElementById("resultado").style.color = "red";
   }
+  else {
+    document.getElementById("resultado").innerText = "Timeout";
+    // document.getElementById(button).style.backgroundColor = "red";
+    document.getElementById("resultado").style.color = "red";
+  }
+}
+
+function changeButtonImage(buttonId, newImagePath) {
+  const button = document.getElementById(buttonId);
+  const image = button.querySelector('img');
+  image.src = newImagePath;
 }

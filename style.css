@@ -8,6 +8,11 @@ button{
     width: 100%;
 
 }
+
+button img {
+    width: 100px; 
+    height: auto; 
+}
 .image img{
     width: 100px;
 }
