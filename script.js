@@ -2,7 +2,11 @@ const logList = []; // Array of the results
 
 const points = 0; // Players points
 
-let timer = 30;
+let timer = 5;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function printLogging(choosen, value, status) {
   // document.add
@@ -35,15 +39,14 @@ function chooseWinner(value) {
   printLogging(choosen, value, status);
 }
 
-function gameTimer() {
-    document.getElementById('timer').innerText = timer;
-    
-    timer--;
-    if (timer < 0) {
-        clearInterval(interval);
-        document.getElementById('timer').innerText = 'Vapo papai!!';
-    }
+function startTimer() {
 
+  while (timer >= 0) {
+    document.getElementById("timer").innerText = timer;
+    timer = timer - 1;
+    console.log()
+  }
+
+  document.getElementById("timer").innerText = "Vapo papai!!";
+  timer = 5;
 }
-
-let interval = setInterval(gameTimer, 1000);
